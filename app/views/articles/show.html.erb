@@ -1,0 +1,12 @@
+<h1 class="text-xl text-blue-500 text-start">Showing article details</h1>
+<p><span class="font-bold">title: </span><%= @article.title %></p>
+<p><span class="font-bold">description: </span><%= @article.description %></p>
+<p class="underline text-blue-500 w">
+  <%= link_to 'Edit article' , edit_article_path(@article) %>
+</p>
+<p class="underline text-blue-500  r">
+  <%= link_to 'Delete article' , article_path(@article) , method: :delete, data: { confirm: "are you sure?"}%>
+</p>
+<p class="underline text-blue-500 ">
+  <%= link_to 'Return to articles listing' , articles_path%>
+</p>

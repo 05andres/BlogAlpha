@@ -1,0 +1,26 @@
+<% if @article.errors.any? %>
+  <h1>Thr followinf erros prevented the article from being seved</h1>
+  <ul class="ml-5 list-disc bg-gray-200 ">
+    <% @article.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+
+  </ul>
+
+
+<% end %>
+<%= form_with(model: @article , local: true) do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title , class:"shadow appearance-none border border-red-500 rounded  py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" %>
+  </p>
+  <p>
+    <%= f.label :description , class:"font-bold" %><br>
+    <%= f.text_area :description ,class:"shadow appearance-none border border-red-500 rounded  py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"%>
+  </p>
+
+  <p>
+    <%= f.submit  %>
+  </p>
+
+<% end %>
