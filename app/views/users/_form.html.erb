@@ -1,0 +1,38 @@
+
+<div class="w-full max-w-xs">
+  <% if @user.errors.any? %>
+
+    <div>
+      <h1>Thr followinf erros prevented the <%= @user.class.name.downcase %> from being seved</h1>
+      <ul class="ml-5 list-disc bg-gray-200 my-5">
+        <% @user.errors.full_messages.each do |msg| %>
+          <li class="text-red-500 text-xs"><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+<%= form_with(model: @user ,class:'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4', local: true) do |f|  %>
+  <div class="mb-4">
+    <%= f.label :username ,class:'block text-gray-700 text-sm font-bold mb-2' %><br>
+    <%= f.text_field :username , class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder:"Username" %>
+  </div>
+  <div class="mb-4">
+    <%= f.label :email ,class:'block text-gray-700 text-sm font-bold mb-2' %><br>
+    <%= f.email_field :email , class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder:"Email" %>
+  </div>
+
+    <div class="mb-4">
+      <%= f.label :password ,class:'block text-gray-700 text-sm font-bold mb-2' %><br>
+      <%= f.password_field :password , class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder:"Choose your password" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= f.submit "Sign up", class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"  %>
+      <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+        Forgot Password?
+      </a>
+    </div>
+</div>
+<% end %>
+

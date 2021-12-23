@@ -1,4 +1,5 @@
 <h1 class="text-xl text-blue-500 text-start">Showing article details</h1>
+<p><span class="font-bold">by: </span><%= @article.user.username if @article.user %></p>
 <p><span class="font-bold">title: </span><%= @article.title %></p>
 <p><span class="font-bold">description: </span><%= @article.description %></p>
 <p class="underline text-blue-500 w">
