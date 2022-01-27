@@ -17,6 +17,12 @@
         class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
       Action
     </th>
+
+      <th
+        class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
+        Categories
+      </th>
+
   </tr>
   </thead>
   <tbody>
@@ -34,14 +40,21 @@
       <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p class="underline  text-blue-500 whitespace-no-wrap text-center"><%= link_to 'Show', article_path(article)  %></p>
       </td>
-      <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p class="underline  text-blue-500 whitespace-no-wrap text-center"><%= link_to 'Delete', article_path(article), method: :delete , data: { confirm: "are you sure?"}  %></p>
+      <% if logged_in? && (article.user == current_user || current_user.admin?) %>
+        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+          <p class="underline  text-blue-500 whitespace-no-wrap text-center"><%= link_to 'Delete', article_path(article), method: :delete , data: { confirm: "are you sure?"}  %></p>
 
-      </td>
-      <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p class="underline text-blue-500 whitespace-no-wrap text-center"><%= link_to 'Edit', edit_article_path(article)  %></p>
+        </td>
+        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+          <p class="underline text-blue-500 whitespace-no-wrap text-center"><%= link_to 'Edit', edit_article_path(article)  %></p>
 
-      </td>
+        </td>
+      <% end %>
+      <% if article.categories.any? %>
+        <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+          <%= render article.categories %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>

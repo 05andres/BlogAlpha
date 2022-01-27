@@ -6,13 +6,27 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/custom-forms@0.2.1/dist/custom-forms.css" rel="stylesheet">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+  <%= render 'layouts/navigation' %>
    <%= render 'layouts/messages' %>
     <%= yield %>
   </body>
+<style>
+    #sortbox:checked ~ #sortboxmenu {
+        opacity: 1;
+    }
+    #sortbox2:checked ~ #sortboxmenu2 {
+        opacity: 1;
+    }
+
+    #sortboxtwo:checked ~ #sortboxmenutwo {
+        opacity: 1;
+    }
+</style>
 </html>

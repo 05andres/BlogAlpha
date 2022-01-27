@@ -2,12 +2,18 @@
 <p><span class="font-bold">by: </span><%= @article.user.username if @article.user %></p>
 <p><span class="font-bold">title: </span><%= @article.title %></p>
 <p><span class="font-bold">description: </span><%= @article.description %></p>
-<p class="underline text-blue-500 w">
-  <%= link_to 'Edit article' , edit_article_path(@article) %>
-</p>
-<p class="underline text-blue-500  r">
-  <%= link_to 'Delete article' , article_path(@article) , method: :delete, data: { confirm: "are you sure?"}%>
-</p>
+<% if @article.categories.any? %>
+  <%= render @article.categories %>
+<% end %>
+
+<% if logged_in? && (@article.user == current_user && current_user.admin?) %>
+  <p class="underline text-blue-500 w">
+    <%= link_to 'Edit article' , edit_article_path(@article) %>
+  </p>
+  <p class="underline text-blue-500  r">
+    <%= link_to 'Delete article' , article_path(@article) , method: :delete, data: { confirm: "are you sure?"}%>
+  </p>
+<% end %>
 <p class="underline text-blue-500 ">
   <%= link_to 'Return to articles listing' , articles_path%>
 </p>

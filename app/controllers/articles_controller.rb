@@ -1,8 +1,28 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:show,:edit,:update,:destroy]
+  before_action :require_user, except: [:show,:index]
+  before_action :require_same_user, only: [:edit,:update,:destroy]
 
   def show
+
+    [
+      {
+        name:'Tennis nike',
+        description:'tennis de ultima de generacion',
+        variants:[
+          {
+            name:'talla 32',
+            price:12222,
+
+          },
+          {
+            name:'talla 32',
+            price:12222,
+          }
+        ]
+      }
+    ]
 
   end
 
@@ -21,7 +41,7 @@ class ArticlesController < ApplicationController
   def create
     #render plain: params[:article]
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     #render plain: @article.inspect
     if @article.save
       flash[:notice] = "Article was created successfully."
@@ -55,7 +75,14 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title,:description)
+    params.require(:article).permit(:title,:description, category_ids: [])
+  end
+
+  def require_same_user
+    if current_user != @article.user && !current_user.admin?
+      flash[:alert] = "You can only edit or delete your own article"
+      redirect_to @article
+    end
   end
 
 

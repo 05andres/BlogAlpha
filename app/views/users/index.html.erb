@@ -17,9 +17,18 @@
           <div>
             <%= link_to "View profile", user, class: "px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 focus:ring-yellow-300" %>
           </div>
-          <div>
-            <%= link_to "Edit profile", edit_user_path(user), class: "px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-300" %>
-          </div>
+          <% if logged_in? %>
+            <% if user == current_user %>
+              <div>
+                <%= link_to "Edit profile", edit_user_path(user), class: "px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-300" %>
+              </div>
+            <% end %>
+            <% if  current_user.admin? %>
+              <div>
+                <%= link_to "Delete user",user_path(user),method: :delete,data: {confirm: 'are you sure you want to delete the user and all associated articles?'}, class: "px-4 py-2 rounded-md text-sm font-medium border-0 focus:outline-none focus:ring transition text-white bg-red-500 hover:bg-red-600 active:bg-red-700 focus:ring-red-300" %>
+              </div>
+            <% end %>
+          <% end %>
         </div>
       </div>
       <div class="flex justify-end mt-4">

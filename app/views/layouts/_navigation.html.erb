@@ -1,0 +1,93 @@
+<nav class="container flex justify-around py-8 mx-auto bg-white">
+  <div class="flex items-center">
+    <h3 class="text-2xl font-medium text-blue-500">LOGO</h3>
+  </div>
+  <!-- left header section -->
+  <div class="items-center hidden space-x-8 lg:flex">
+    <%= link_to 'Bloggers', users_path , class: 'text-lg text-black' %>
+    <% if logged_in? %>
+      <div class="relative">
+        <input type="checkbox" id="sortboxtwo" class="hidden absolute">
+        <label for="sortboxtwo" class="flex items-center space-x-1 cursor-pointer">
+          <span class="text-xg"><%="(Admin)" if current_user.admin?  %></span><span class="text-lg">Profile[<%= current_user.username %>]</span>
+          <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </label>
+
+        <div id="sortboxmenutwo" class="absolute mt-1 right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10">
+          <ul class="block text-right text-gray-900">
+            <li>
+              <%= link_to 'View your profile' , user_path(current_user), class:'block px-3 py-2 hover:bg-gray-200' %>
+            </li>
+            <li>
+              <%= link_to 'Edit your profile' , edit_user_path(current_user), class: 'block px-3 py-2 hover:bg-gray-200'%>
+            </li>
+            <li>
+              <%= link_to 'Delete profile' , user_path(current_user), method: :delete, data: { confirm: "Are you sure?" }, class: 'block text-red-500 px-3 py-2 hover:bg-gray-200'%>
+            </li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+    <div class="relative">
+      <input type="checkbox" id="sortbox" class="hidden absolute">
+      <label for="sortbox" class="flex items-center space-x-1 cursor-pointer">
+        <span class="text-lg">Articles</span>
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </label>
+
+      <div id="sortboxmenu" class="absolute mt-1 right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10">
+        <ul class="block text-right text-gray-900">
+          <% if logged_in? %>
+            <li>
+              <%= link_to 'Create new article' , new_article_path, class:'block px-3 py-2 hover:bg-gray-200' %>
+            </li>
+          <% end %>
+          <li>
+            <%= link_to 'View articles' , articles_path, class: 'block px-3 py-2 hover:bg-gray-200'%>
+          </li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-200">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="relative">
+      <input type="checkbox" id="sortbox2" class="hidden absolute">
+      <label for="sortbox2" class="flex items-center space-x-1 cursor-pointer">
+        <span class="text-lg">Categories</span>
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </label>
+
+      <div id="sortboxmenu2" class="absolute mt-1 right-1 top-full min-w-max shadow rounded opacity-0 bg-gray-300 border border-gray-400 transition delay-75 ease-in-out z-10">
+        <ul class="block text-right text-gray-900">
+          <% if logged_in? && current_user.admin? %>
+            <li>
+              <%= link_to 'Create new category' , new_category_path, class:'block px-3 py-2 hover:bg-gray-200' %>
+            </li>
+          <% end %>
+          <li>
+            <%= link_to 'View categories' , categories_path, class: 'block px-3 py-2 hover:bg-gray-200'%>
+          </li>
+          <li><a href="#" class="block px-3 py-2 hover:bg-gray-200">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="">About Us</a>
+  </div>
+  <!-- right header section -->
+  <div class="flex items-center space-x-2">
+    <% if logged_in? %>
+      <%= link_to current_user.username, user_path(current_user), class:"px-4 py-2 text-blue-100 bg-blue-800 rounded-md"  %>
+
+      <%= link_to 'logout', logout_path, method: :delete, class:"px-4 py-2 text-blue-100 bg-blue-800 rounded-md"  %>
+    <%else %>
+      <%= link_to 'login in', login_path, class:"px-4 py-2 text-blue-100 bg-blue-800 rounded-md"  %>
+      <%= link_to 'signup', signup_path, class:"px-4 py-2 text-gray-200 bg-gray-400 rounded-md"  %>
+  <%end %>
+  </div>
+</nav>

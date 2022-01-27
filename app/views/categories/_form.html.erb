@@ -1,0 +1,28 @@
+<div class="flex justify-center mt-10">
+
+  <div class="w-full max-w-xs">
+    <% if @category.errors.any? %>
+
+      <div>
+        <h1>The following errors prevented the <%= @category.class.name.downcase %> from being saved</h1>
+        <ul class="ml-5 list-disc bg-gray-200 my-5">
+          <% @category.errors.full_messages.each do |msg| %>
+            <li class="text-red-500 text-xs"><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+
+    <% end %>
+    <%= form_with(model: @category ,class:'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4', local: true) do |f|  %>
+      <div class="mb-4">
+        <%= f.label :name, 'Category name' ,class:'block text-gray-700 text-sm font-bold mb-2' %><br>
+        <%= f.text_field :name , class:"shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", placeholder:"Enter name" %>
+      </div>
+      <div class="flex items-center justify-center">
+        <%= f.submit class:"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+      </div>
+    <% end %>
+
+
+    </div>
